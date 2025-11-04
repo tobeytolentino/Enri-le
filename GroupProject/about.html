@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About - Enri'Le</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- User Welcome Bar -->
+<div class="user-welcome" id="userWelcome">
+  <div class="container">
+    Welcome back, <span id="welcomeUsername"></span>! 
+    <a href="#" id="logoutLink" style="color: #5a3e36; margin-left: 15px; text-decoration: underline;">Logout</a>
+  </div>
+</div>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg sticky-top">
+  <div class="container">
+    <!-- Logo + Brand -->
+    <a class="navbar-brand fw-bold d-flex align-items-center" href="index.html">
+      <img src="" alt="" 
+           style="height: 45px; width: auto; margin-right: 10px; border-radius: 8px;">
+      Enri'Le
+    </a>
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
+        <li class="nav-item"><a class="nav-link" href="login.html" id="navLogin">Login</a></li>
+        <li class="nav-item d-none" id="profileItem"><a class="nav-link" href="profile.html">My Profile</a></li>
+        <li class="nav-item"><a class="nav-link active" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="privacy.html">Privacy</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="container">
+    <h1>Our Story</h1>
+    <p>Discover the passion behind Enri'Le and our commitment to timeless fashion</p>
+    <a href="shop.html" class="btn btn-velvet">
+      <i class="fas fa-shopping-bag me-2"></i>Explore Our Collection
+    </a>
+  </div>
+</section>
+
+<!-- About Section -->
+<section class="about-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 mb-4">
+        <div class="about-card fade-in">
+          <h3>Our Beginning</h3>
+          <p>
+            Enri'Le was born from a passion for timeless elegance, where every piece tells a story. 
+            From vintage rings and handcrafted jackets to unique hats and classic watches, our collection celebrates the charm of fashion that transcends time.
+          </p>
+          <p>
+            We carefully curate every item to ensure it brings beauty, history, and quality into your wardrobe.
+            Whether you're a long-time vintage lover or new to the style, Enri'Le is your destination for iconic pieces.
+          </p>
+          <div class="text-center mt-4">
+            <a href="shop.html" class="btn btn-velvet">
+              <i class="fas fa-eye me-2"></i>View Our Collection
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-6 mb-4">
+        <div class="about-card fade-in">
+          <h3>Our Mission</h3>
+          <p><strong>Vision:</strong> To be a leading destination for vintage fashion, inspiring people to embrace individuality through timeless style.</p>
+          <p><strong>Mission:</strong> We aim to offer unique, high-quality vintage fashion that's sustainable, expressive, and empowering — connecting the past to the present beautifully.</p>
+          <p>Every piece in our collection is selected with care, ensuring it meets our standards for quality, authenticity, and style.</p>
+          <div class="text-center mt-4">
+            <a href="shop.html" class="btn btn-velvet">
+              <i class="fas fa-gem me-2"></i>Discover Vintage Treasures
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row mt-4">
+      <div class="col-12">
+        <div class="about-card fade-in">
+          <div class="row">
+            <div class="col-md-4 text-center">
+              <div class="feature-icon">
+                <i class="fas fa-gem"></i>
+              </div>
+              <h4>Curated Selection</h4>
+              <p>Each item is handpicked for its unique character, quality, and story.</p>
+            </div>
+            <div class="col-md-4 text-center">
+              <div class="feature-icon">
+                <i class="fas fa-leaf"></i>
+              </div>
+              <h4>Sustainable Fashion</h4>
+              <p>By choosing vintage, you're making an eco-friendly fashion statement.</p>
+            </div>
+            <div class="col-md-4 text-center">
+              <div class="feature-icon">
+                <i class="fas fa-heart"></i>
+              </div>
+              <h4>Timeless Style</h4>
+              <p>Our pieces transcend trends, offering enduring elegance for years to come.</p>
+            </div>
+          </div>
+          <div class="text-center mt-4">
+            <a href="shop.html" class="btn btn-velvet">
+              <i class="fas fa-star me-2"></i>Shop Our Curated Collection
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Shop CTA Section -->
+<section class="shop-cta">
+  <div class="container">
+    <h2>Ready to Explore Our Vintage Collection?</h2>
+    <p>Discover unique pieces with history and character that will elevate your style.</p>
+    <a href="shop.html" class="btn btn-velvet btn-light">
+      <i class="fas fa-arrow-right me-2"></i>Shop Now
+    </a>
+  </div>
+</section>
+
+<!-- Values Section -->
+<section class="values-section">
+  <div class="container">
+    <h2 class="section-title">Our Values</h2>
+    
+    <div class="row">
+      <div class="col-md-4">
+        <div class="value-item fade-in">
+          <div class="value-icon">
+            <i class="fas fa-history"></i>
+          </div>
+          <h3 class="value-title">Heritage & History</h3>
+          <p class="value-desc">We believe in preserving the stories and craftsmanship of the past, giving new life to pieces with history and character.</p>
+        </div>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="value-item fade-in">
+          <div class="value-icon">
+            <i class="fas fa-recycle"></i>
+          </div>
+          <h3 class="value-title">Sustainability</h3>
+          <p class="value-desc">By promoting vintage fashion, we contribute to a more sustainable future, reducing waste and environmental impact.</p>
+        </div>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="value-item fade-in">
+          <div class="value-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <h3 class="value-title">Community</h3>
+          <p class="value-desc">We're building a community of vintage enthusiasts who appreciate quality, uniqueness, and timeless style.</p>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-5">
+      <a href="shop.html" class="btn btn-velvet">
+        <i class="fas fa-shopping-basket me-2"></i>Join Our Community & Shop
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Team Section -->
+<section class="team-section">
+  <div class="container">
+    <h2 class="section-title">Meet Our Team</h2>
+    
+    <div class="row">
+      <div class="col-md-4">
+        <div class="team-card fade-in">
+          <img src="c:\Users\tolen\OneDrive\Documents\GitHub\CSOI101_M040_TOLENTINO_TOBEY\CSOI101_M040_TOLENTINO_TOBEY\GroupProject\tk.jpg" class="team-img" alt="Eleanor Richards">
+          <div class="team-info">
+            <h4 class="team-name">Tobey Tolentino</h4>
+            <p class="team-role">Founder & Creative Director</p>
+            <p class="team-desc">With a background in fashion history and a passion for vintage aesthetics, Tobey curates our collection with an expert eye for quality and style.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="team-card fade-in">
+          <img src="C:\Users\tolen\OneDrive\Documents\GitHub\CSOI101_M040_TOLENTINO_TOBEY\CSOI101_M040_TOLENTINO_TOBEY\GroupProject\albert.jpg" class="team-img" alt="James Wilson">
+          <div class="team-info">
+            <h4 class="team-name">Angelo Alberto</h4>
+            <p class="team-role">Head of Operations</p>
+            <p class="team-desc">Angelo ensures every piece meets our quality standards and that our customers receive exceptional service from selection to delivery.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-4">
+        <div class="team-card fade-in">
+          <img src="c:\Users\tolen\OneDrive\Documents\GitHub\CSOI101_M040_TOLENTINO_TOBEY\CSOI101_M040_TOLENTINO_TOBEY\GroupProject\juan.jpg" class="team-img" alt="Sophia Chen">
+          <div class="team-info">
+            <h4 class="team-name">Juan Basañes</h4>
+            <p class="team-role">Vintage Specialist</p>
+            <p class="team-desc">Juan's expertise in textile preservation and vintage authentication ensures every piece in our collection is genuine and well-preserved.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-5">
+      <a href="shop.html" class="btn btn-velvet">
+        <i class="fas fa-search me-2"></i>Explore Our Curated Selection
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="text-center">
+  <div class="container">
+    <p class="mb-1">&copy; 2025 Enri'Le. All rights reserved.</p>
+    <p>Curating timeless pieces for the modern vintage enthusiast.</p>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-pinterest"></i></a>
+      <a href="#"><i class="fab fa-tiktok"></i></a>
+    </div>
+    <div class="mt-4">
+      <a href="shop.html" class="btn btn-velvet btn-sm">
+        <i class="fas fa-shopping-bag me-1"></i>Shop Now
+      </a>
+    </div>
+  </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Custom JavaScript -->
+<script src="script.js"></script>
+</body>
+</html>
