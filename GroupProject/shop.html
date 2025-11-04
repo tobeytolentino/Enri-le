@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Enri'Le - Vintage Collection</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- User Welcome Bar -->
+<div class="user-welcome" id="userWelcome">
+  <div class="container">
+    Welcome back, <span id="welcomeUsername"></span>! 
+    <a href="#" id="logoutLink" style="color: #5a3e36; margin-left: 15px; text-decoration: underline;">Logout</a>
+  </div>
+</div>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg sticky-top">
+  <div class="container">
+    <!-- Logo + Brand -->
+    <a class="navbar-brand fw-bold d-flex align-items-center" href="index.html">
+      <img src="" alt="" 
+           style="height: 45px; width: auto; margin-right: 10px; border-radius: 8px;">
+      Enri'Le
+    </a>
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link active" href="shop.html">Shop</a></li>
+        <li class="nav-item"><a class="nav-link" href="login.html" id="navLogin">Login</a></li>
+        <li class="nav-item d-none" id="profileItem"><a class="nav-link" href="profile.html">My Profile</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="privacy.html">Privacy</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="container">
+    <h1>Curated Vintage Collection</h1>
+    <p>Discover timeless pieces with stories to tell. Each item is carefully selected for its unique character and quality.</p>
+  </div>
+</section>
+
+<!-- Filter Section -->
+<div class="container">
+  <div class="filter-section">
+    <div class="row">
+      <div class="col-md-3">
+        <h5 class="filter-title">Category</h5>
+        <div class="filter-option">
+          <input type="checkbox" id="category1" checked>
+          <label for="category1">Accessories</label>
+        </div>
+        <div class="filter-option">
+          <input type="checkbox" id="category2" checked>
+          <label for="category2">Clothing</label>
+        </div>
+        <div class="filter-option">
+          <input type="checkbox" id="category3" checked>
+          <label for="category3">Jewelry</label>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <h5 class="filter-title">Price Range</h5>
+        <div class="filter-option">
+          <input type="radio" id="price1" name="price" checked>
+          <label for="price1">All Prices</label>
+        </div>
+        <div class="filter-option">
+          <input type="radio" id="price2" name="price">
+          <label for="price2">Under $50</label>
+        </div>
+        <div class="filter-option">
+          <input type="radio" id="price3" name="price">
+          <label for="price3">$50 - $100</label>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <h5 class="filter-title">Era</h5>
+        <div class="filter-option">
+          <input type="checkbox" id="era1" checked>
+          <label for="era1">1970s</label>
+        </div>
+        <div class="filter-option">
+          <input type="checkbox" id="era2" checked>
+          <label for="era2">1980s</label>
+        </div>
+        <div class="filter-option">
+          <input type="checkbox" id="era3" checked>
+          <label for="era3">1990s</label>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <h5 class="filter-title">Condition</h5>
+        <div class="filter-option">
+          <input type="checkbox" id="condition1" checked>
+          <label for="condition1">Excellent</label>
+        </div>
+        <div class="filter-option">
+          <input type="checkbox" id="condition2" checked>
+          <label for="condition2">Very Good</label>
+        </div>
+        <div class="filter-option">
+          <input type="checkbox" id="condition3">
+          <label for="condition3">Good</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Product Section -->
+<section class="product-section">
+  <div class="container">
+    <h2 class="section-title">Our Vintage Collection</h2>
+    <div class="row g-4 product-loading">
+
+      <!-- Product Cards -->
+      <!-- 1. Watch -->
+      <div class="col-md-3">
+        <div class="card h-100">
+          <img src="https://ae01.alicdn.com/kf/S23ce2ca642dc4e8cabe3e9f5d15765a1p.jpg_640x640q90.jpg" class="card-img-top" alt="Vintage Watch">
+          <div class="card-body">
+            <span class="price-tag">$89.00</span>
+            <h5 class="card-title">Vintage Watch</h5>
+            <p class="card-text">Classic timepiece with leather strap. Perfect for adding a touch of elegance to any outfit.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Ring -->
+      <div class="col-md-3">
+        <div class="card h-100">
+          <img src="https://th.bing.com/th/id/OIP.-ThdQECcR3aeyZnTya1WNwHaFT?w=206&h=150&c=6&o=7&dpr=1.3&pid=1.7&rm=3" class="card-img-top" alt="Gold Ring">
+          <div class="card-body">
+            <span class="price-tag">$35.00</span>
+            <h5 class="card-title">Vintage Gold Ring</h5>
+            <p class="card-text">Elegant gold ring with intricate detailing. A timeless piece that complements any style.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Jacket -->
+      <div class="col-md-3">
+        <div class="card h-100">
+          <img src="https://beamhill.fi/wp-content/uploads/2023/11/Stussy-WASHED-CANVAS-SHOP-JACKET-Black.jpg" class="card-img-top" alt="Denim Jacket">
+          <div class="card-body">
+            <span class="price-tag">$70.00</span>
+            <h5 class="card-title">Stussy Vintage Jacket</h5>
+            <p class="card-text">Authentic vintage denim jacket with iconic Stussy branding. A collector's item.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Hat -->
+      <div class="col-md-3">
+        <div class="card h-100">
+          <img src="https://th.bing.com/th/id/OIP.abc123example.jpg" class="card-img-top" alt="Beret Hat">
+          <div class="card-body">
+            <span class="price-tag">$20.00</span>
+            <h5 class="card-title">Kangol Beret Hat</h5>
+            <p class="card-text">Classic Kangol beret in black. The perfect accessory to complete any vintage look.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Floral Dress -->
+      <div class="col-md-3">
+        <div class="card h-100">
+          <img src="https://ae01.alicdn.com/kf/S23ce2ca642dc4e8cabe3e9f5d15765a1p.jpg_640x640q90.jpg" class="card-img-top" alt="Floral Dress">
+          <div class="card-body">
+            <span class="price-tag">$65.00</span>
+            <h5 class="card-title">Vintage Floral Dress</h5>
+            <p class="card-text">Beautiful floral print dress with a flattering silhouette. Perfect for special occasions.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. Leather Bag -->
+      <div class="col-md-3">
+        <div class="card h-100">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0v2yS5Mw51D77Ar1XkAGG8x-lVS6ZU0APzg&s" class="card-img-top" alt="Leather Bag">
+          <div class="card-body">
+            <span class="price-tag">$45.00</span>
+            <h5 class="card-title">Retro Leather Bag</h5>
+            <p class="card-text">Genuine leather bag with vintage charm. Spacious interior with multiple compartments.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7. Glasses -->
+      <div class="col-md-3">
+        <div class="card h-100">
+          <img src="https://images.unsplash.com/photo-1574258495973-f010dfbb5371?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1035&q=80" class="card-img-top" alt="Round Glasses">
+          <div class="card-body">
+            <span class="price-tag">$25.00</span>
+            <h5 class="card-title">Round Frame Glasses</h5>
+            <p class="card-text">Vintage-inspired round frame glasses. Lightweight and comfortable for everyday wear.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8. Wool Coat -->
+      <div class="col-md-3">
+        <div class="card h-100">
+          <img src="https://th.bing.com/th/id/OIP.rG8t3H_Q1wO83zEOMIRX6wHaJ4?w=186&h=248&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" class="card-img-top" alt="Wool Coat">
+          <div class="card-body">
+            <span class="price-tag">$120.00</span>
+            <h5 class="card-title">Vintage Wool Coat (Prada)</h5>
+            <p class="card-text">Luxurious wool coat from Prada's vintage collection. Timeless design and premium quality.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="text-center">
+  <div class="container">
+    <p class="mb-1">&copy; 2025 Enri'Le. All rights reserved.</p>
+    <p>Curating timeless pieces for the modern vintage enthusiast.</p>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-pinterest"></i></a>
+      <a href="#"><i class="fab fa-tiktok"></i></a>
+    </div>
+  </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Custom JavaScript -->
+<script src="script.js"></script>
+</body>
+</html>
