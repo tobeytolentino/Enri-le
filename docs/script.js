@@ -9,8 +9,9 @@ function initLoginPage() {
     const passwordError = document.getElementById('passwordError');
     const successMessage = document.getElementById('successMessage');
 
-    // Initialize user data if not exists
+    // Initialize user data if not exists - ONLY ONE ADMIN ACCOUNT
     if (!localStorage.getItem('users')) {
+        console.log('Initializing users for the first time...');
         const defaultUsers = {
             'admin': {
                 fullName: 'Administrator',
@@ -19,17 +20,14 @@ function initLoginPage() {
                 password: 'admin123',
                 role: 'admin',
                 createdAt: new Date().toISOString()
-            },
-            'user': {
-                fullName: 'Demo User',
-                email: 'user@enri-le.com',
-                username: 'user',
-                password: 'user123',
-                role: 'user',
-                createdAt: new Date().toISOString()
             }
         };
         localStorage.setItem('users', JSON.stringify(defaultUsers));
+        console.log('Admin account created:', defaultUsers.admin);
+    } else {
+        console.log('Users already exist in localStorage');
+        const existingUsers = JSON.parse(localStorage.getItem('users'));
+        console.log('Existing users:', Object.keys(existingUsers));
     }
 
     // Initialize products if not exists - USING YOUR SPECIFIC PRODUCTS
@@ -123,12 +121,18 @@ function initLoginPage() {
         if (e.target === registerModal) registerModal.style.display = 'none'; 
     };
 
-    // Register Form Submission - UPDATED TO MAKE NEW USERS ADMIN
+    // Register Form Submission - ALL NEW ACCOUNTS ARE REGULAR USERS
     if (registerForm) {
         registerForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const users = JSON.parse(localStorage.getItem('users'));
             const username = document.getElementById('newUsername').value.trim();
+
+            // Prevent creating another admin account
+            if (username.toLowerCase() === 'admin') {
+                alert('Admin username is reserved. Please choose a different username.');
+                return;
+            }
 
             if (users[username]) {
                 alert('Username already exists!');
@@ -148,13 +152,13 @@ function initLoginPage() {
                 return;
             }
 
-            // NEW: All new accounts are created as admin
+            // ALL NEW ACCOUNTS ARE REGULAR USERS
             users[username] = {
                 fullName: document.getElementById('fullName').value,
                 email: document.getElementById('email').value,
                 username: username,
                 password: document.getElementById('newPassword').value,
-                role: 'admin', // All new accounts are admin
+                role: 'user', // All new accounts are regular users
                 createdAt: new Date().toISOString()
             };
             
@@ -165,38 +169,47 @@ function initLoginPage() {
             setTimeout(() => {
                 successMessage.style.display = 'none';
                 registerModal.style.display = 'none';
-                alert('Account created successfully! You now have admin access.');
+                alert('Account created successfully! You can now log in.');
             }, 2000);
         });
     }
 
-    // Login Form Submission
+    // Login Form Submission - FIXED VERSION
     if (loginForm) {
         loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            const users = JSON.parse(localStorage.getItem('users'));
+            const users = JSON.parse(localStorage.getItem('users') || '{}');
             const usernameValue = document.getElementById('username').value.trim();
             const passwordValue = document.getElementById('password').value;
 
+            console.log('Login attempt for username:', usernameValue);
+            console.log('Available users:', Object.keys(users));
+
             if (!users[usernameValue]) {
+                console.log('Username not found:', usernameValue);
                 loginError.textContent = 'Username not found';
                 loginError.style.display = 'block';
                 return;
             }
 
+            console.log('User found, checking password...');
             if (users[usernameValue].password !== passwordValue) {
+                console.log('Invalid password for user:', usernameValue);
                 loginError.textContent = 'Invalid password';
                 loginError.style.display = 'block';
                 return;
             }
 
+            console.log('Login successful for:', usernameValue);
             localStorage.setItem('isLoggedIn', 'true');
             localStorage.setItem('currentUser', JSON.stringify(users[usernameValue]));
             
-            // Redirect to admin panel if user is admin
+            // Redirect to admin panel ONLY if user is admin
             if (users[usernameValue].role === 'admin') {
+                console.log('Redirecting to admin panel...');
                 window.location.href = 'admin.html';
             } else {
+                console.log('Redirecting to main site...');
                 window.location.href = 'index.html';
             }
         });
@@ -228,7 +241,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (navLogin) navLogin.classList.add('d-none');
         if (profileItem) profileItem.classList.remove('d-none');
         
-        // Show admin link if user is admin
+        // Show admin link ONLY if user is admin
         if (adminLink && currentUser.role === 'admin') {
             adminLink.classList.remove('d-none');
         }
@@ -428,15 +441,15 @@ function initProfilePage() {
     });
 }
 
-// Admin Page Functionality
+// Admin Page Functionality - STRICTER ADMIN CHECK
 function initAdminPage() {
     console.log('Initializing admin page...');
     
     const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
     
-    // Check if user is admin
-    if (!currentUser || currentUser.role !== 'admin') {
-        alert('Access denied. Admin privileges required.');
+    // STRICT ADMIN CHECK - Only username 'admin' can access
+    if (!currentUser || currentUser.username !== 'admin') {
+        alert('Access denied. Administrator privileges required.');
         window.location.href = 'login.html';
         return;
     }
@@ -598,6 +611,12 @@ function saveUser() {
     const users = JSON.parse(localStorage.getItem('users') || '{}');
     const isEdit = document.getElementById('userUsername').hasAttribute('readonly');
     
+    // PREVENT CREATING NEW ADMIN ACCOUNTS
+    if (!isEdit && username.toLowerCase() === 'admin') {
+        showAdminToast('Admin username is reserved. Please choose a different username.', 'error');
+        return;
+    }
+    
     if (!isEdit && users[username]) {
         showAdminToast('Username already exists!', 'error');
         return;
@@ -606,6 +625,19 @@ function saveUser() {
     if (isEdit) {
         // Editing existing user
         const originalUsername = document.getElementById('userUsername').value;
+        
+        // PREVENT CHANGING ADMIN USERNAME OR ROLE
+        if (originalUsername === 'admin') {
+            if (username !== 'admin') {
+                showAdminToast('Cannot change admin username.', 'error');
+                return;
+            }
+            if (role !== 'admin') {
+                showAdminToast('Cannot change admin role.', 'error');
+                return;
+            }
+        }
+        
         users[originalUsername].fullName = fullName;
         users[originalUsername].email = email;
         users[originalUsername].role = role;
@@ -614,12 +646,12 @@ function saveUser() {
             users[originalUsername].password = password;
         }
     } else {
-        // Adding new user
+        // Adding new user - ALL NEW USERS ARE REGULAR USERS
         users[username] = {
             username: username,
             fullName: fullName,
             email: email,
-            role: role,
+            role: 'user', // Force all new users to be regular users
             password: password || 'default123',
             createdAt: new Date().toISOString()
         };
@@ -633,8 +665,9 @@ function saveUser() {
 }
 
 function deleteUser(username) {
+    // PREVENT DELETING THE MAIN ADMIN ACCOUNT
     if (username === 'admin') {
-        showAdminToast('Cannot delete the main admin account.', 'error');
+        showAdminToast('Cannot delete the main administrator account.', 'error');
         return;
     }
     
