@@ -178,7 +178,7 @@
               
               <div class="order-items">
                 <div class="order-item">
-                  <img src="https://beamhill.fi/wp-content/uploads/2023/11/Stussy-WASHED-CANVAS-SHOP-JACKET-Black.jpg" class="item-image" alt="Stussy Jacket">
+                  <img src="https://i.etsystatic.com/27071082/r/il/bec26e/3974441708/il_fullxfull.3974441708_s332.jpg" class="item-image" alt="Stussy Jacket">
                   <div class="item-details">
                     <div class="item-name">Stussy Vintage Jacket</div>
                     <div class="item-price">$70.00</div>
@@ -297,7 +297,220 @@
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Custom JavaScript -->
-<script src="script.js"></script>
+
+<!-- PROFILE FUNCTIONALITY - SIMPLIFIED AND FIXED -->
+<script>
+// Profile functionality directly in HTML
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🚀 Profile page loaded');
+    
+    // Check if user is logged in
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+    
+    console.log('Login Status:', isLoggedIn);
+    console.log('Current User:', currentUser);
+    
+    // Redirect to login if not logged in
+    if (!isLoggedIn || isLoggedIn !== 'true' || !currentUser) {
+        console.log('❌ Not logged in, redirecting to login...');
+        window.location.href = 'login.html';
+        return;
+    }
+    
+    console.log('✅ User is logged in:', currentUser.username);
+    
+    // Populate profile data
+    function populateProfileData(user) {
+        console.log('📝 Populating profile data for:', user);
+        
+        // Update profile display
+        document.getElementById('profileFullName').textContent = user.fullName || 'User';
+        document.getElementById('profileUsername').textContent = `@${user.username}`;
+        document.getElementById('infoFullName').textContent = user.fullName || 'Not set';
+        document.getElementById('infoUsername').textContent = user.username || 'Not set';
+        document.getElementById('infoEmail').textContent = user.email || 'Not set';
+        document.getElementById('infoMemberSince').textContent = user.createdAt ? 
+            new Date(user.createdAt).toLocaleDateString() : 'Recently';
+        
+        // Populate edit form
+        document.getElementById('editFullName').value = user.fullName || '';
+        document.getElementById('editEmail').value = user.email || '';
+        document.getElementById('editUsername').value = user.username || '';
+        
+        console.log('✅ Profile data populated successfully');
+    }
+    
+    // Show logged in state
+    function showLoggedInState(user) {
+        // Show welcome bar
+        const userWelcome = document.getElementById('userWelcome');
+        const welcomeUsername = document.getElementById('welcomeUsername');
+        
+        if (userWelcome) userWelcome.style.display = 'block';
+        if (welcomeUsername) welcomeUsername.textContent = user.username;
+        
+        // Update navigation
+        const navLogin = document.getElementById('navLogin');
+        const profileItem = document.getElementById('profileItem');
+        
+        if (navLogin) navLogin.classList.add('d-none');
+        if (profileItem) profileItem.classList.remove('d-none');
+    }
+    
+    // Edit profile functionality - SIMPLIFIED AND FIXED
+    function setupEditProfile() {
+        const saveBtn = document.getElementById('saveProfileChanges');
+        
+        console.log('🛠 Setting up edit profile functionality...');
+        
+        if (!saveBtn) {
+            console.error('❌ Save button not found!');
+            return;
+        }
+        
+        saveBtn.addEventListener('click', function() {
+            console.log('💾 SAVE PROFILE BUTTON CLICKED!');
+            
+            // Get current user data
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+            const currentUsername = currentUser.username;
+            
+            if (!currentUsername) {
+                alert('No user logged in!');
+                return;
+            }
+            
+            // Get form values
+            const newFullName = document.getElementById('editFullName').value.trim();
+            const newEmail = document.getElementById('editEmail').value.trim();
+            const newUsername = document.getElementById('editUsername').value.trim();
+            const newPassword = document.getElementById('editPassword').value;
+            
+            console.log('Form values:', { newFullName, newEmail, newUsername, newPassword });
+            
+            // Basic validation
+            if (!newFullName || !newEmail || !newUsername) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
+            // Get users database
+            const users = JSON.parse(localStorage.getItem('users') || '{}');
+            console.log('Current users in database:', Object.keys(users));
+            
+            // Check if user exists in database
+            if (!users[currentUsername]) {
+                alert('User not found in database!');
+                return;
+            }
+            
+            // Check if new username is taken (only if username changed)
+            if (newUsername !== currentUsername && users[newUsername]) {
+                alert('Username already exists! Please choose a different one.');
+                return;
+            }
+            
+            // UPDATE USER DATA
+            try {
+                // Update the user object
+                const updatedUser = {
+                    ...users[currentUsername],
+                    fullName: newFullName,
+                    email: newEmail,
+                    username: newUsername
+                };
+                
+                // Update password if provided
+                if (newPassword) {
+                    updatedUser.password = newPassword;
+                }
+                
+                // Handle username change in users database
+                if (newUsername !== currentUsername) {
+                    // Remove old username entry
+                    delete users[currentUsername];
+                }
+                
+                // Add/update user with new username
+                users[newUsername] = updatedUser;
+                
+                // Save to localStorage
+                localStorage.setItem('users', JSON.stringify(users));
+                localStorage.setItem('currentUser', JSON.stringify(updatedUser));
+                
+                console.log('✅ User data saved successfully!');
+                console.log('Updated user:', updatedUser);
+                
+                // Update UI
+                populateProfileData(updatedUser);
+                showLoggedInState(updatedUser);
+                
+                // Show success message
+                alert('✅ Profile updated successfully!');
+                
+                // Clear password field
+                document.getElementById('editPassword').value = '';
+                
+                // FIXED: Simple modal close - use Bootstrap's data attributes
+                const modalElement = document.getElementById('editProfileModal');
+                const closeButton = modalElement.querySelector('[data-bs-dismiss="modal"]');
+                if (closeButton) {
+                    closeButton.click();
+                } else {
+                    // Fallback: hide the modal manually
+                    modalElement.classList.remove('show');
+                    modalElement.style.display = 'none';
+                    document.body.classList.remove('modal-open');
+                    const backdrop = document.querySelector('.modal-backdrop');
+                    if (backdrop) backdrop.remove();
+                }
+                
+                console.log('✅ Modal closed successfully');
+                
+            } catch (error) {
+                console.error('❌ Error saving profile:', error);
+                alert('Error saving profile: ' + error.message);
+            }
+        });
+    }
+    
+    // Logout functionality
+    function setupLogout() {
+        const logoutLink = document.getElementById('logoutLink');
+        if (logoutLink) {
+            logoutLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                console.log('🚪 Logging out...');
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('currentUser');
+                window.location.href = 'index.html';
+            });
+        }
+    }
+    
+    // Initialize everything
+    function init() {
+        console.log('🔄 Initializing profile page...');
+        
+        // Populate data and show UI
+        populateProfileData(currentUser);
+        showLoggedInState(currentUser);
+        setupEditProfile();
+        setupLogout();
+        
+        console.log('✅ Profile page fully initialized and ready!');
+    }
+    
+    // Start initialization
+    init();
+});
+
+// Global error handler
+window.addEventListener('error', function(e) {
+    console.error('💥 Global JavaScript Error:', e.error);
+});
+</script>
+
 </body>
 </html>
