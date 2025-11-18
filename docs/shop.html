@@ -44,6 +44,13 @@
         <li class="nav-item d-none" id="profileItem"><a class="nav-link" href="profile.html">My Profile</a></li>
         <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
         <li class="nav-item"><a class="nav-link" href="privacy.html">Privacy</a></li>
+        <!-- Cart Icon -->
+        <li class="nav-item">
+          <a class="nav-link position-relative" href="#" id="cartIcon">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cartCount">0</span>
+          </a>
+        </li>
       </ul>
     </div>
   </div>
@@ -128,7 +135,17 @@
 <!-- Product Section -->
 <section class="product-section">
   <div class="container">
-    <h2 class="section-title">Our Vintage Collection</h2>
+    <!-- Cart Header Section -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="section-title mb-0">Our Vintage Collection</h2>
+      <div class="d-flex align-items-center gap-3">
+        <span class="text-muted" id="cartTotal">Cart Total: $0.00</span>
+        <button class="btn-velvet btn-sm" id="viewCartBtn">
+          <i class="fas fa-shopping-cart me-2"></i>View Cart
+        </button>
+      </div>
+    </div>
+
     <div class="row g-4 product-loading">
 
       <!-- Product Cards -->
@@ -140,6 +157,9 @@
             <span class="price-tag">$89.00</span>
             <h5 class="card-title">Vintage Watch</h5>
             <p class="card-text">Classic timepiece with leather strap. Perfect for adding a touch of elegance to any outfit.</p>
+            <button class="btn-velvet w-100 add-to-cart" data-id="1" data-name="Vintage Watch" data-price="89.00" data-image="https://ae01.alicdn.com/kf/S23ce2ca642dc4e8cabe3e9f5d15765a1p.jpg_640x640q90.jpg">
+              <i class="fas fa-cart-plus me-2"></i>Add to Cart
+            </button>
           </div>
         </div>
       </div>
@@ -152,6 +172,9 @@
             <span class="price-tag">$35.00</span>
             <h5 class="card-title">Vintage Gold Ring</h5>
             <p class="card-text">Elegant gold ring with intricate detailing. A timeless piece that complements any style.</p>
+            <button class="btn-velvet w-100 add-to-cart" data-id="2" data-name="Vintage Gold Ring" data-price="35.00" data-image="https://th.bing.com/th/id/OIP.-ThdQECcR3aeyZnTya1WNwHaFT?w=206&h=150&c=6&o=7&dpr=1.3&pid=1.7&rm=3">
+              <i class="fas fa-cart-plus me-2"></i>Add to Cart
+            </button>
           </div>
         </div>
       </div>
@@ -159,11 +182,14 @@
       <!-- 3. Jacket -->
       <div class="col-md-3">
         <div class="card h-100">
-          <img src="https://beamhill.fi/wp-content/uploads/2023/11/Stussy-WASHED-CANVAS-SHOP-JACKET-Black.jpg" class="card-img-top" alt="Denim Jacket">
+          <img src="https://i.etsystatic.com/27071082/r/il/bec26e/3974441708/il_fullxfull.3974441708_s332.jpg" class="card-img-top" alt="Denim Jacket">
           <div class="card-body">
             <span class="price-tag">$70.00</span>
             <h5 class="card-title">Stussy Vintage Jacket</h5>
             <p class="card-text">Authentic vintage denim jacket with iconic Stussy branding. A collector's item.</p>
+            <button class="btn-velvet w-100 add-to-cart" data-id="3" data-name="Stussy Vintage Jacket" data-price="70.00" data-image="https://beamhill.fi/wp-content/uploads/2023/11/Stussy-WASHED-CANVAS-SHOP-JACKET-Black.jpg">
+              <i class="fas fa-cart-plus me-2"></i>Add to Cart
+            </button>
           </div>
         </div>
       </div>
@@ -171,11 +197,14 @@
       <!-- 4. Hat -->
       <div class="col-md-3">
         <div class="card h-100">
-          <img src="https://th.bing.com/th/id/OIP.abc123example.jpg" class="card-img-top" alt="Beret Hat">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrwu2QfGsDt3PG-ZxwxX1XPS_i_JslfyoEwg&s" class="card-img-top" alt="Beret Hat">
           <div class="card-body">
             <span class="price-tag">$20.00</span>
             <h5 class="card-title">Kangol Beret Hat</h5>
             <p class="card-text">Classic Kangol beret in black. The perfect accessory to complete any vintage look.</p>
+            <button class="btn-velvet w-100 add-to-cart" data-id="4" data-name="Kangol Beret Hat" data-price="20.00" data-image="https://th.bing.com/th/id/OIP.abc123example.jpg">
+              <i class="fas fa-cart-plus me-2"></i>Add to Cart
+            </button>
           </div>
         </div>
       </div>
@@ -188,6 +217,9 @@
             <span class="price-tag">$65.00</span>
             <h5 class="card-title">Vintage Floral Dress</h5>
             <p class="card-text">Beautiful floral print dress with a flattering silhouette. Perfect for special occasions.</p>
+            <button class="btn-velvet w-100 add-to-cart" data-id="5" data-name="Vintage Floral Dress" data-price="65.00" data-image="https://ae01.alicdn.com/kf/S23ce2ca642dc4e8cabe3e9f5d15765a1p.jpg_640x640q90.jpg">
+              <i class="fas fa-cart-plus me-2"></i>Add to Cart
+            </button>
           </div>
         </div>
       </div>
@@ -200,6 +232,9 @@
             <span class="price-tag">$45.00</span>
             <h5 class="card-title">Retro Leather Bag</h5>
             <p class="card-text">Genuine leather bag with vintage charm. Spacious interior with multiple compartments.</p>
+            <button class="btn-velvet w-100 add-to-cart" data-id="6" data-name="Retro Leather Bag" data-price="45.00" data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0v2yS5Mw51D77Ar1XkAGG8x-lVS6ZU0APzg&s">
+              <i class="fas fa-cart-plus me-2"></i>Add to Cart
+            </button>
           </div>
         </div>
       </div>
@@ -212,6 +247,9 @@
             <span class="price-tag">$25.00</span>
             <h5 class="card-title">Round Frame Glasses</h5>
             <p class="card-text">Vintage-inspired round frame glasses. Lightweight and comfortable for everyday wear.</p>
+            <button class="btn-velvet w-100 add-to-cart" data-id="7" data-name="Round Frame Glasses" data-price="25.00" data-image="https://images.unsplash.com/photo-1574258495973-f010dfbb5371?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1035&q=80">
+              <i class="fas fa-cart-plus me-2"></i>Add to Cart
+            </button>
           </div>
         </div>
       </div>
@@ -224,6 +262,9 @@
             <span class="price-tag">$120.00</span>
             <h5 class="card-title">Vintage Wool Coat (Prada)</h5>
             <p class="card-text">Luxurious wool coat from Prada's vintage collection. Timeless design and premium quality.</p>
+            <button class="btn-velvet w-100 add-to-cart" data-id="8" data-name="Vintage Wool Coat (Prada)" data-price="120.00" data-image="https://th.bing.com/th/id/OIP.rG8t3H_Q1wO83zEOMIRX6wHaJ4?w=186&h=248&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3">
+              <i class="fas fa-cart-plus me-2"></i>Add to Cart
+            </button>
           </div>
         </div>
       </div>
@@ -231,6 +272,57 @@
     </div>
   </div>
 </section>
+
+<!-- Cart Modal -->
+<div class="modal fade" id="cartModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: var(--nav-color);">
+        <h5 class="modal-title"><i class="fas fa-shopping-cart me-2"></i>Your Shopping Cart</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div id="cartItems" class="mb-4">
+          <!-- Cart items will be dynamically inserted here -->
+          <div class="text-center text-muted py-4" id="emptyCartMessage">
+            <i class="fas fa-shopping-cart fa-3x mb-3"></i>
+            <p>Your cart is empty</p>
+          </div>
+        </div>
+        <div class="cart-summary border-top pt-3">
+          <div class="row">
+            <div class="col-6">
+              <strong>Subtotal:</strong>
+            </div>
+            <div class="col-6 text-end">
+              <span id="cartSubtotal">$0.00</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <strong>Shipping:</strong>
+            </div>
+            <div class="col-6 text-end">
+              <span id="cartShipping">$10.00</span>
+            </div>
+          </div>
+          <div class="row mt-2" style="font-size: 1.1rem;">
+            <div class="col-6">
+              <strong>Total:</strong>
+            </div>
+            <div class="col-6 text-end">
+              <strong id="cartTotalAmount">$10.00</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Continue Shopping</button>
+        <button type="button" class="btn-velvet" id="checkoutBtn">Proceed to Checkout</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Footer -->
 <footer class="text-center">
