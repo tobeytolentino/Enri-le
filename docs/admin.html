@@ -13,7 +13,7 @@
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
             <a class="navbar-brand" href="index.html">
-                <i class="fas fa-coffee"></i> Enri-le
+                <i class="fas fa-store"></i> Enri-le
             </a>
             <div class="navbar-nav ms-auto">
                 <a class="nav-link" href="index.html"><i class="fas fa-home"></i> Home</a>
@@ -132,6 +132,23 @@
                     </tbody>
                 </table>
             </div>
+
+            <!-- Data Management Section -->
+            <div class="admin-table mt-5">
+                <div class="d-flex justify-content-between align-items-center p-3 border-bottom">
+                    <h4 class="mb-0"><i class="fas fa-database me-2"></i>Data Management</h4>
+                </div>
+                <div class="p-3">
+                    <button class="btn-velvet me-2" onclick="exportUserData()">
+                        <i class="fas fa-download me-1"></i> Export All Data
+                    </button>
+                    <label class="btn-velvet">
+                        <i class="fas fa-upload me-1"></i> Import Data
+                        <input type="file" accept=".json" onchange="importUserData(event)" style="display: none;">
+                    </label>
+                    <p class="text-muted mt-2 mb-0">Export your data to transfer between devices</p>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -201,9 +218,11 @@
                     <div class="mb-3">
                         <label for="productCategory" class="form-label">Category</label>
                         <select class="form-control" id="productCategory">
-                            <option value="coffee">Coffee</option>
-                            <option value="tea">Tea</option>
+                            <option value="furniture">Furniture</option>
+                            <option value="clothing">Clothing</option>
                             <option value="accessories">Accessories</option>
+                            <option value="decor">Home Decor</option>
+                            <option value="collectibles">Collectibles</option>
                         </select>
                     </div>
                     <div class="mb-3">
