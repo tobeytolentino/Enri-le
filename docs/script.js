@@ -1,5 +1,81 @@
-// Login Page Specific JavaScript
+// ===== ENSURE ADMIN ACCOUNT EXISTS ON EVERY DEVICE =====
+function ensureAdminAccount() {
+    const users = JSON.parse(localStorage.getItem('users') || '{}');
+    
+    // Create admin account if it doesn't exist
+    if (!users['admin']) {
+        users['admin'] = {
+            fullName: 'Administrator',
+            email: 'admin@enri-le.com',
+            username: 'admin',
+            password: 'admin123',
+            role: 'admin',
+            createdAt: new Date().toISOString()
+        };
+        localStorage.setItem('users', JSON.stringify(users));
+        console.log('Admin account created on this device');
+    }
+}
+
+// ===== DATA EXPORT/IMPORT FUNCTIONALITY =====
+function exportUserData() {
+    const users = JSON.parse(localStorage.getItem('users') || '{}');
+    const products = JSON.parse(localStorage.getItem('products') || '[]');
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    
+    const data = {
+        users: users,
+        products: products,
+        cart: cart,
+        exportDate: new Date().toISOString()
+    };
+    
+    const dataStr = JSON.stringify(data, null, 2);
+    const dataBlob = new Blob([dataStr], {type: 'application/json'});
+    
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(dataBlob);
+    link.download = 'enri-le-data.json';
+    link.click();
+    
+    showAdminToast('Data exported successfully!', 'success');
+}
+
+function importUserData(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            const data = JSON.parse(e.target.result);
+            
+            if (data.users) {
+                localStorage.setItem('users', JSON.stringify(data.users));
+            }
+            if (data.products) {
+                localStorage.setItem('products', JSON.stringify(data.products));
+            }
+            if (data.cart) {
+                localStorage.setItem('cart', JSON.stringify(data.cart));
+            }
+            
+            showAdminToast('Data imported successfully! Page will reload.', 'success');
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
+        } catch (error) {
+            showAdminToast('Error importing data: ' + error.message, 'error');
+        }
+    };
+    reader.readAsText(file);
+}
+
+// ===== LOGIN PAGE SPECIFIC JAVASCRIPT =====
 function initLoginPage() {
+    // Ensure admin account exists on this device
+    ensureAdminAccount();
+    
     const loginForm = document.getElementById('loginForm');
     const registerForm = document.getElementById('registerForm');
     const registerModal = document.getElementById('registerModal');
@@ -221,8 +297,11 @@ if (document.getElementById('loginForm')) {
     document.addEventListener('DOMContentLoaded', initLoginPage);
 }
 
-// Common JavaScript for all pages
+// ===== COMMON JAVASCRIPT FOR ALL PAGES =====
 document.addEventListener('DOMContentLoaded', function() {
+    // Ensure admin account exists on every page load
+    ensureAdminAccount();
+    
     const isLoggedIn = localStorage.getItem('isLoggedIn');
     const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
     const userWelcome = document.getElementById('userWelcome');
@@ -282,7 +361,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Profile Page Specific JavaScript - FIXED VERSION
+// ===== PROFILE PAGE SPECIFIC JAVASCRIPT =====
 function initProfilePage() {
     console.log('Initializing profile page...');
     
@@ -441,7 +520,7 @@ function initProfilePage() {
     });
 }
 
-// Admin Page Functionality - STRICTER ADMIN CHECK
+// ===== ADMIN PAGE FUNCTIONALITY =====
 function initAdminPage() {
     console.log('Initializing admin page...');
     
@@ -794,7 +873,7 @@ function setStock(productId, newStock) {
     }
 }
 
-// Utility Functions
+// ===== UTILITY FUNCTIONS =====
 function generateId() {
     return Date.now().toString();
 }
@@ -851,7 +930,7 @@ function createToastContainer() {
     return container;
 }
 
-// Shopping Cart Functionality - Make functions globally accessible
+// ===== SHOPPING CART FUNCTIONALITY =====
 window.initShoppingCart = function() {
     console.log('Initializing shopping cart...');
     
@@ -1075,7 +1154,7 @@ function showCartMessage(message, type) {
     }, 3000);
 }
 
-// Make functions globally available
+// ===== GLOBAL FUNCTION EXPORTS =====
 window.editUser = editUser;
 window.deleteUser = deleteUser;
 window.editProduct = editProduct;
@@ -1083,6 +1162,8 @@ window.deleteProduct = deleteProduct;
 window.updateStock = updateStock;
 window.setStock = setStock;
 window.closeModal = closeModal;
+window.exportUserData = exportUserData;
+window.importUserData = importUserData;
 
 // Close modals when clicking outside
 window.onclick = function(event) {
