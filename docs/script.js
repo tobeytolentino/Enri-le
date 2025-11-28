@@ -133,7 +133,7 @@ function initLoginPage() {
                 price: 70.00,
                 stock: 5,
                 description: 'Authentic vintage denim jacket with iconic Stussy branding. A collector\'s item.',
-                image: 'https://beamhill.fi/wp-content/uploads/2023/11/Stussy-WASHED-CANVAS-SHOP-JACKET-Black.jpg',
+                image: 'https://i.etsystatic.com/27071082/r/il/bec26e/3974441708/il_fullxfull.3974441708_s332.jpg',
                 category: 'clothing'
             },
             {
@@ -142,7 +142,7 @@ function initLoginPage() {
                 price: 20.00,
                 stock: 0,
                 description: 'Classic Kangol beret in black. The perfect accessory to complete any vintage look.',
-                image: 'https://th.bing.com/th/id/OIP.abc123example.jpg',
+                image: 'https://ae01.alicdn.com/kf/S23ce2ca642dc4e8cabe3e9f5d15765a1p.jpg_640x640q90.jpg',
                 category: 'accessories'
             },
             {
@@ -347,6 +347,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Shop page detected, initializing cart...');
         setTimeout(() => {
             initShoppingCart();
+            loadProductsFromStorage(); // Add this line to load products dynamically
         }, 100);
     }
 
@@ -871,6 +872,184 @@ function setStock(productId, newStock) {
         loadAdminDashboard();
         showAdminToast('Stock updated successfully!', 'success');
     }
+}
+
+// ===== DYNAMIC PRODUCT LOADING FOR SHOP PAGE =====
+function loadProductsFromStorage() {
+    const productsContainer = document.getElementById('productsContainer');
+    
+    if (!productsContainer) {
+        console.log('Not on shop page, skipping product loading');
+        return;
+    }
+    
+    console.log('Loading products for shop page...');
+    
+    // Get products from localStorage
+    let products = JSON.parse(localStorage.getItem('products') || '[]');
+    
+    console.log('Products found in localStorage:', products.length);
+    
+    // If no products in localStorage, use the default products
+    if (products.length === 0) {
+        console.log('No products in localStorage, using default products');
+        products = [
+            {
+                id: '1',
+                name: 'Vintage Watch',
+                price: 89.00,
+                stock: 15,
+                description: 'Classic timepiece with leather strap. Perfect for adding a touch of elegance to any outfit.',
+                image: 'https://ae01.alicdn.com/kf/S23ce2ca642dc4e8cabe3e9f5d15765a1p.jpg_640x640q90.jpg',
+                category: 'accessories'
+            },
+            {
+                id: '2',
+                name: 'Vintage Gold Ring',
+                price: 35.00,
+                stock: 8,
+                description: 'Elegant gold ring with intricate detailing. A timeless piece that complements any style.',
+                image: 'https://th.bing.com/th/id/OIP.-ThdQECcR3aeyZnTya1WNwHaFT?w=206&h=150&c=6&o=7&dpr=1.3&pid=1.7&rm=3',
+                category: 'jewelry'
+            },
+            {
+                id: '3',
+                name: 'Stussy Vintage Jacket',
+                price: 70.00,
+                stock: 5,
+                description: 'Authentic vintage denim jacket with iconic Stussy branding. A collector\'s item.',
+                image: 'https://beamhill.fi/wp-content/uploads/2023/11/Stussy-WASHED-CANVAS-SHOP-JACKET-Black.jpg',
+                category: 'clothing'
+            },
+            {
+                id: '4',
+                name: 'Kangol Beret Hat',
+                price: 20.00,
+                stock: 0,
+                description: 'Classic Kangol beret in black. The perfect accessory to complete any vintage look.',
+                image: 'https://th.bing.com/th/id/OIP.abc123example.jpg',
+                category: 'accessories'
+            },
+            {
+                id: '5',
+                name: 'Vintage Floral Dress',
+                price: 65.00,
+                stock: 12,
+                description: 'Beautiful floral print dress with a flattering silhouette. Perfect for special occasions.',
+                image: 'https://ae01.alicdn.com/kf/S23ce2ca642dc4e8cabe3e9f5d15765a1p.jpg_640x640q90.jpg',
+                category: 'clothing'
+            },
+            {
+                id: '6',
+                name: 'Retro Leather Bag',
+                price: 45.00,
+                stock: 7,
+                description: 'Genuine leather bag with vintage charm. Spacious interior with multiple compartments.',
+                image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0v2yS5Mw51D77Ar1XkAGG8x-lVS6ZU0APzg&s',
+                category: 'accessories'
+            },
+            {
+                id: '7',
+                name: 'Round Frame Glasses',
+                price: 25.00,
+                stock: 20,
+                description: 'Vintage-inspired round frame glasses. Lightweight and comfortable for everyday wear.',
+                image: 'https://images.unsplash.com/photo-1574258495973-f010dfbb5371?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1035&q=80',
+                category: 'accessories'
+            },
+            {
+                id: '8',
+                name: 'Vintage Wool Coat (Prada)',
+                price: 120.00,
+                stock: 3,
+                description: 'Luxurious wool coat from Prada\'s vintage collection. Timeless design and premium quality.',
+                image: 'https://th.bing.com/th/id/OIP.rG8t3H_Q1wO83zEOMIRX6wHaJ4?w=186&h=248&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3',
+                category: 'clothing'
+            }
+        ];
+        
+        // Save default products to localStorage for future use
+        localStorage.setItem('products', JSON.stringify(products));
+    }
+    
+    let productsHTML = '';
+    
+    products.forEach(product => {
+        // Only show products with stock > 0
+        if (product.stock > 0) {
+            productsHTML += `
+                <div class="col-md-3">
+                    <div class="card h-100">
+                        <img src="${product.image || 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'}" 
+                             class="card-img-top" alt="${product.name}" 
+                             style="height: 200px; object-fit: cover;">
+                        <div class="card-body d-flex flex-column">
+                            <span class="price-tag">$${product.price.toFixed(2)}</span>
+                            <h5 class="card-title">${product.name}</h5>
+                            <p class="card-text flex-grow-1">${product.description || 'A beautiful vintage item with unique character.'}</p>
+                            <div class="stock-info mb-2">
+                                <small class="text-muted">
+                                    <i class="fas fa-box me-1"></i>
+                                    ${product.stock} in stock
+                                </small>
+                            </div>
+                            <button class="btn-velvet w-100 add-to-cart" 
+                                    data-id="${product.id}" 
+                                    data-name="${product.name}" 
+                                    data-price="${product.price}" 
+                                    data-image="${product.image || 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'}">
+                                <i class="fas fa-cart-plus me-2"></i>Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+    });
+    
+    productsContainer.innerHTML = productsHTML;
+    
+    // Re-attach event listeners to the new add-to-cart buttons
+    const addToCartButtons = document.querySelectorAll('.add-to-cart');
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            console.log('Add to cart clicked - dynamic product');
+            const product = {
+                id: this.getAttribute('data-id'),
+                name: this.getAttribute('data-name'),
+                price: parseFloat(this.getAttribute('data-price')),
+                image: this.getAttribute('data-image'),
+                quantity: 1
+            };
+            addToCart(product);
+        });
+    });
+    
+    console.log('Products loaded successfully. Total products:', products.length);
+}
+
+// Make it globally available
+window.loadProductsFromStorage = loadProductsFromStorage;
+
+// ===== SHOP PAGE INITIALIZATION =====
+function initShopPage() {
+    console.log('Initializing shop page...');
+    
+    // Load products immediately
+    loadProductsFromStorage();
+    
+    // Then initialize shopping cart
+    setTimeout(() => {
+        if (window.initShoppingCart) {
+            window.initShoppingCart();
+        }
+    }, 100);
+}
+
+// Check if we're on the shop page and initialize
+if (document.getElementById('productsContainer')) {
+    console.log('Shop page detected, forcing product load...');
+    document.addEventListener('DOMContentLoaded', initShopPage);
 }
 
 // ===== UTILITY FUNCTIONS =====
